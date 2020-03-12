@@ -1,0 +1,82 @@
+
+  <mat-horizontal-stepper #stepper>
+    <mat-step [stepControl]="userFormGroup">
+      <div class="content-holder">
+        <form [formGroup]="userFormGroup">
+          <ng-template matStepLabel>Fill out your name</ng-template>
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Last name, First name" formControlName="name" required>
+          </mat-form-field>
+          <div>
+            <button  mat-raised-button color="primary" mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="userFormGroup">
+      <div class="content-holder">
+        <form [formGroup]="userFormGroup">
+          <ng-template matStepLabel>Fill out your position</ng-template>
+          <mat-form-field>
+            <mat-label>Position</mat-label>
+            <input matInput formControlName="position" placeholder="Ex Manager"
+                   required>
+          </mat-form-field>
+          <div>
+            <button class="mr-5" mat-raised-button color="warn" mat-button matStepperPrevious>Back</button>
+            <button color="primary" mat-raised-button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="userFormGroup">
+      <div class="content-holder">
+        <form [formGroup]="userFormGroup">
+          <ng-template matStepLabel>Fill out your country</ng-template>
+          <mat-form-field>
+            <mat-label>Country</mat-label>
+            <input matInput formControlName="country" placeholder="Ex Georfia, Canada"
+                   required>
+          </mat-form-field>
+          <div>
+            <button class="mr-5" color="warn" mat-button mat-raised-button matStepperPrevious>Back</button>
+            <button color="primary" mat-button mat-raised-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="userFormGroup">
+      <div class="content-holder">
+        <form [formGroup]="userFormGroup">
+          <ng-template matStepLabel>Fill out your age</ng-template>
+          <mat-form-field>
+            <mat-label>Age</mat-label>
+            <input matInput formControlName="age" placeholder="Ex 23, 34"
+                   required>
+          </mat-form-field>
+          <div>
+            <button class="mr-5" color="warn" mat-button mat-raised-button matStepperPrevious>Back</button>
+            <button color="primary" mat-button mat-raised-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+    <mat-step>
+      <div class="content-holder">
+        <ng-template matStepLabel>Done</ng-template>
+        <p *ngIf="createSucceded; userIsUpdated">User is created.</p>
+        <ng-template #userIsUpdated>
+          <p *ngIf="createSucceded; userIsUpdated">User is updated.</p>
+        </ng-template>
+        <div>
+          <button color="warn" class="mr-5" mat-button mat-raised-button matStepperPrevious>Back</button>
+          <button *ngIf="!exsitingUserFlag; else updatingUser" [disabled]="!userFormGroup.valid" color="primary" mat-button mat-raised-button (click)="createUser()">Send</button>
+          <ng-template #updatingUser>
+            <button [disabled]="!userFormGroup.valid" color="primary" mat-button mat-raised-button (click)="updateUser()">Update</button>
+          </ng-template>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+  
